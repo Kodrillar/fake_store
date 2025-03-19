@@ -2,6 +2,7 @@ import 'package:fake_store/src/features/auth/presentation/screens/login.dart';
 import 'package:fake_store/src/features/auth/presentation/screens/welcome.dart';
 import 'package:fake_store/src/features/cart/presentation/screens/cart.dart';
 import 'package:fake_store/src/features/home/presentation/screens/home.dart';
+import 'package:fake_store/src/features/home/presentation/screens/nav_home.dart';
 import 'package:fake_store/src/features/home/presentation/screens/product_details.dart';
 import 'package:fake_store/src/features/wishlist/presentation/screens/wishlist.dart';
 import 'package:go_router/go_router.dart';
@@ -9,6 +10,7 @@ import 'package:go_router/go_router.dart';
 enum AppRoutes {
   welcome,
   login,
+  navHome,
   home,
   productDetails,
   cart,
@@ -16,7 +18,7 @@ enum AppRoutes {
 }
 
 final GoRouter goRouter = GoRouter(
-  initialLocation: '/',
+  initialLocation: '/${AppRoutes.navHome.name}', // '/',
   debugLogDiagnostics: true,
   routes: [
     GoRoute(
@@ -32,24 +34,31 @@ final GoRouter goRouter = GoRouter(
       ],
     ),
     GoRoute(
-      path: '/${AppRoutes.home.name}',
-      name: AppRoutes.home.name,
-      builder: (context, state) => const HomeScreen(),
+      path: '/${AppRoutes.navHome.name}',
+      name: AppRoutes.navHome.name,
+      builder: (context, state) => const NavHomeView(),
       routes: [
         GoRoute(
-          path: AppRoutes.productDetails.name,
-          name: AppRoutes.productDetails.name,
-          builder: (context, state) => const ProductDetailsScreen(),
-        ),
-        GoRoute(
-          path: AppRoutes.cart.name,
-          name: AppRoutes.cart.name,
-          builder: (context, state) => const CartScreen(),
-        ),
-        GoRoute(
-          path: AppRoutes.wishList.name,
-          name: AppRoutes.wishList.name,
-          builder: (context, state) => const WishListScreen(),
+          path: '/${AppRoutes.home.name}',
+          name: AppRoutes.home.name,
+          builder: (context, state) => const HomeScreen(),
+          routes: [
+            GoRoute(
+              path: AppRoutes.productDetails.name,
+              name: AppRoutes.productDetails.name,
+              builder: (context, state) => const ProductDetailsScreen(),
+            ),
+            GoRoute(
+              path: AppRoutes.cart.name,
+              name: AppRoutes.cart.name,
+              builder: (context, state) => const CartScreen(),
+            ),
+            GoRoute(
+              path: AppRoutes.wishList.name,
+              name: AppRoutes.wishList.name,
+              builder: (context, state) => const WishListScreen(),
+            )
+          ],
         )
       ],
     )

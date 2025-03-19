@@ -1,6 +1,8 @@
 import 'package:fake_store/src/core/extensions/build_context.dart';
 import 'package:fake_store/src/core/widgets/app_scaffold.dart';
 import 'package:fake_store/src/core/widgets/header_text.dart';
+import 'package:fake_store/src/core/widgets/product_name_text.dart';
+import 'package:fake_store/src/core/widgets/product_price_text.dart';
 import 'package:fake_store/src/res/app_fonts.dart';
 import 'package:fake_store/src/res/app_spacers.dart';
 import 'package:fake_store/src/res/app_svgs.dart';
@@ -121,12 +123,7 @@ class ProductCardDetails extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SText(
-          '"Awaken, My Love!"',
-          maxLines: 1,
-          style: TextStyle(
-              fontWeight: FontWeight.w600, overflow: TextOverflow.ellipsis),
-        ),
+        const ProductNameText('"Awaken, My Love!"'),
         SText(
           'Childish Gambino',
           maxLines: 1,
@@ -153,14 +150,9 @@ class ProductCardDetails extends StatelessWidget {
           ],
         ),
         Spacers.h10,
-        //RATING
-        const SText(
-          '\$19.99',
-          style: TextStyle(
-            fontWeight: FontWeight.w500,
-            fontSize: 12,
-          ),
-        )
+
+        //PRICE
+        const ProductPriceText('\$19.99')
       ],
     );
   }

@@ -1,6 +1,9 @@
 import 'package:fake_store/src/features/auth/presentation/screens/login.dart';
 import 'package:fake_store/src/features/auth/presentation/screens/welcome.dart';
+import 'package:fake_store/src/features/cart/presentation/screens/cart.dart';
 import 'package:fake_store/src/features/home/presentation/screens/home.dart';
+import 'package:fake_store/src/features/home/presentation/screens/product_details.dart';
+import 'package:fake_store/src/features/wishlist/presentation/screens/wishlist.dart';
 import 'package:go_router/go_router.dart';
 
 enum AppRoutes {
@@ -8,6 +11,8 @@ enum AppRoutes {
   login,
   home,
   productDetails,
+  cart,
+  wishList,
 }
 
 final GoRouter goRouter = GoRouter(
@@ -34,7 +39,17 @@ final GoRouter goRouter = GoRouter(
         GoRoute(
           path: AppRoutes.productDetails.name,
           name: AppRoutes.productDetails.name,
-          builder: (context, state) => const ProductCardDetails(),
+          builder: (context, state) => const ProductDetailsScreen(),
+        ),
+        GoRoute(
+          path: AppRoutes.cart.name,
+          name: AppRoutes.cart.name,
+          builder: (context, state) => const CartScreen(),
+        ),
+        GoRoute(
+          path: AppRoutes.wishList.name,
+          name: AppRoutes.wishList.name,
+          builder: (context, state) => const WishListScreen(),
         )
       ],
     )

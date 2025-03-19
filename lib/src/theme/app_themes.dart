@@ -14,6 +14,7 @@ sealed class BaseTheme {
   Color get textFieldBorder;
   Color get textFieldAction;
   Color get error;
+  Color get favorite;
 }
 
 class FakeStoreLight extends BaseTheme {
@@ -55,4 +56,7 @@ class FakeStoreLight extends BaseTheme {
 
   @override
   Color get error => const Color(0xFFCC474E);
+
+  @override
+  Color get favorite => const Color(0xFFEB4335);
 }

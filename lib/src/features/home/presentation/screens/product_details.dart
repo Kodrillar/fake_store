@@ -1,6 +1,7 @@
 import 'package:fake_store/src/core/extensions/build_context.dart';
 import 'package:fake_store/src/core/widgets/app_primary_button.dart';
 import 'package:fake_store/src/core/widgets/app_scaffold.dart';
+import 'package:fake_store/src/core/widgets/button_text.dart';
 import 'package:fake_store/src/res/app_fonts.dart';
 import 'package:fake_store/src/res/app_spacers.dart';
 import 'package:fake_store/src/routing/app_router.dart';
@@ -46,14 +47,14 @@ class ProductDetailsScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    const SText(
+                    SText(
                       'Xbox One Elite Series 2 Controller',
                       maxLines: 1,
                       style: TextStyle(
-                        overflow: TextOverflow.ellipsis,
-                        fontWeight: FontWeight.w600,
-                        fontSize: 20,
-                      ),
+                          overflow: TextOverflow.ellipsis,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 20,
+                          color: context.appTheme.primary.withOpacity(.75)),
                     ),
                     Spacers.h10,
                     //CATEGORY
@@ -61,7 +62,7 @@ class ProductDetailsScreen extends StatelessWidget {
                       'Gaming Category',
                       style: TextStyle(
                         fontWeight: FontWeight.w600,
-                        color: context.appTheme.textSecondary,
+                        color: context.appTheme.textSecondary.withOpacity(.5),
                         fontSize: 12,
                       ),
                     ),
@@ -135,7 +136,7 @@ class ProductDetailsFooter extends StatelessWidget {
           // ACTION
           Expanded(
             child: AppPrimaryButton(
-              child: const SText('Add to cart'),
+              child: const ButtonText('Add to cart'),
               onPressed: () => context.pushNamed(AppRoutes.cart.name),
             ),
           )

@@ -1,4 +1,3 @@
-import 'package:fake_store/src/features/home/presentation/screens/home.dart';
 import 'package:fake_store/src/routing/app_router.dart';
 import 'package:fake_store/src/theme/app_theme.dart';
 import 'package:fake_store/src/theme/app_theme_data.dart';

@@ -1,6 +1,7 @@
 import 'package:fake_store/src/core/extensions/build_context.dart';
 import 'package:fake_store/src/core/widgets/app_primary_button.dart';
 import 'package:fake_store/src/core/widgets/app_scaffold.dart';
+import 'package:fake_store/src/core/widgets/button_text.dart';
 import 'package:fake_store/src/core/widgets/header_text.dart';
 import 'package:fake_store/src/core/widgets/product_name_text.dart';
 import 'package:fake_store/src/core/widgets/product_price_text.dart';
@@ -204,6 +205,7 @@ class CartScreenFooter extends StatelessWidget {
                 style: TextStyle(
                   fontFamily: AppFonts.inter,
                   fontSize: 12,
+                  color: context.appTheme.primary.withOpacity(.6),
                 ),
               ),
               SText(
@@ -216,7 +218,7 @@ class CartScreenFooter extends StatelessWidget {
           // ACTION
           Expanded(
             child: AppPrimaryButton(
-              child: const SText('Checkout'),
+              child: const ButtonText('Checkout'),
               onPressed: () => context.pushNamed(AppRoutes.wishList.name),
             ),
           )

@@ -1,5 +1,6 @@
 import 'package:fake_store/src/core/widgets/app_primary_button.dart';
 import 'package:fake_store/src/core/widgets/app_scaffold.dart';
+import 'package:fake_store/src/core/widgets/button_text.dart';
 import 'package:fake_store/src/res/app_images.dart';
 import 'package:fake_store/src/res/app_spacers.dart';
 import 'package:fake_store/src/routing/app_router.dart';
@@ -50,7 +51,7 @@ class WelcomeContents extends StatelessWidget {
         ),
         const SizedBox(height: 30),
         AppPrimaryButton(
-          child: const SText('Login'),
+          child: const ButtonText('Login'),
           onPressed: () => context.pushNamed(AppRoutes.login.name),
         ),
         const Spacer()

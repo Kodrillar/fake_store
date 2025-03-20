@@ -27,7 +27,7 @@ class AppPrimaryButton extends StatelessWidget {
           ),
         ),
       ),
-      child: child, //TODO: Create ButtonText & ButtonLoader widgets
+      child: child,
     );
   }
 }

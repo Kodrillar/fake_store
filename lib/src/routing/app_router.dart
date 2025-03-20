@@ -17,50 +17,50 @@ enum AppRoutes {
   wishList,
 }
 
-final GoRouter goRouter = GoRouter(
-  initialLocation: '/${AppRoutes.navHome.name}', // '/',
-  debugLogDiagnostics: true,
-  routes: [
-    GoRoute(
-      path: '/',
-      name: AppRoutes.welcome.name,
-      builder: (context, state) => const WelcomeScreen(),
+GoRouter getGoRouter(String initialLocation) => GoRouter(
+      initialLocation: initialLocation,
+      debugLogDiagnostics: true,
       routes: [
         GoRoute(
-          path: AppRoutes.login.name,
-          name: AppRoutes.login.name,
-          builder: (context, state) => const LoginScreen(),
-        )
-      ],
-    ),
-    GoRoute(
-      path: '/${AppRoutes.navHome.name}',
-      name: AppRoutes.navHome.name,
-      builder: (context, state) => const NavHomeView(),
-      routes: [
-        GoRoute(
-          path: '/${AppRoutes.home.name}',
-          name: AppRoutes.home.name,
-          builder: (context, state) => const HomeScreen(),
+          path: '/',
+          name: AppRoutes.welcome.name,
+          builder: (context, state) => const WelcomeScreen(),
           routes: [
             GoRoute(
-              path: AppRoutes.productDetails.name,
-              name: AppRoutes.productDetails.name,
-              builder: (context, state) => const ProductDetailsScreen(),
-            ),
+              path: AppRoutes.login.name,
+              name: AppRoutes.login.name,
+              builder: (context, state) => const LoginScreen(),
+            )
+          ],
+        ),
+        GoRoute(
+          path: '/${AppRoutes.navHome.name}',
+          name: AppRoutes.navHome.name,
+          builder: (context, state) => const NavHomeView(),
+          routes: [
             GoRoute(
-              path: AppRoutes.cart.name,
-              name: AppRoutes.cart.name,
-              builder: (context, state) => const CartScreen(),
-            ),
-            GoRoute(
-              path: AppRoutes.wishList.name,
-              name: AppRoutes.wishList.name,
-              builder: (context, state) => const WishListScreen(),
+              path: '/${AppRoutes.home.name}',
+              name: AppRoutes.home.name,
+              builder: (context, state) => const HomeScreen(),
+              routes: [
+                GoRoute(
+                  path: AppRoutes.productDetails.name,
+                  name: AppRoutes.productDetails.name,
+                  builder: (context, state) => const ProductDetailsScreen(),
+                ),
+                GoRoute(
+                  path: AppRoutes.cart.name,
+                  name: AppRoutes.cart.name,
+                  builder: (context, state) => const CartScreen(),
+                ),
+                GoRoute(
+                  path: AppRoutes.wishList.name,
+                  name: AppRoutes.wishList.name,
+                  builder: (context, state) => const WishListScreen(),
+                )
+              ],
             )
           ],
         )
       ],
-    )
-  ],
-);
+    );

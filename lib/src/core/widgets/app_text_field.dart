@@ -1,4 +1,5 @@
 import 'package:fake_store/src/core/extensions/build_context.dart';
+import 'package:fake_store/src/core/utils/text_field_validators.dart';
 import 'package:flutter/material.dart';
 
 class AppTextField extends StatelessWidget {
@@ -6,12 +7,14 @@ class AppTextField extends StatelessWidget {
     super.key,
     this.hintText,
     this.suffix,
+    this.controller,
     this.obscureText = false,
   });
 
   final String? hintText;
   final Widget? suffix;
   final bool obscureText;
+  final TextEditingController? controller;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +23,11 @@ class AppTextField extends StatelessWidget {
       borderRadius: BorderRadius.circular(10),
     );
     return TextFormField(
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      controller: controller,
       obscureText: obscureText,
+      validator: TextFieldValidators.generic,
+      obscuringCharacter: "-",
       decoration: InputDecoration(
         filled: true,
         fillColor: context.appTheme.textFieldFill,

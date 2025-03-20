@@ -1,9 +1,9 @@
 import 'package:fake_store/src/core/extensions/build_context.dart';
 import 'package:fake_store/src/core/widgets/app_scaffold.dart';
 import 'package:fake_store/src/core/widgets/header_text.dart';
+import 'package:fake_store/src/core/widgets/log_out_button.dart';
 import 'package:fake_store/src/core/widgets/product_name_text.dart';
 import 'package:fake_store/src/core/widgets/product_price_text.dart';
-import 'package:fake_store/src/features/home/presentation/screens/home.dart';
 import 'package:fake_store/src/res/app_spacers.dart';
 import 'package:flutter/material.dart';
 import 'package:screendapt/screendapt.dart';

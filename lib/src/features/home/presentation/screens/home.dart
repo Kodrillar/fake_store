@@ -1,14 +1,13 @@
 import 'package:fake_store/src/core/extensions/build_context.dart';
 import 'package:fake_store/src/core/widgets/app_scaffold.dart';
 import 'package:fake_store/src/core/widgets/header_text.dart';
+import 'package:fake_store/src/core/widgets/log_out_button.dart';
 import 'package:fake_store/src/core/widgets/product_name_text.dart';
 import 'package:fake_store/src/core/widgets/product_price_text.dart';
-import 'package:fake_store/src/res/app_fonts.dart';
+import 'package:fake_store/src/features/auth/data/repository/auth.dart';
 import 'package:fake_store/src/res/app_spacers.dart';
-import 'package:fake_store/src/res/app_svgs.dart';
 import 'package:fake_store/src/routing/app_router.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:screendapt/screendapt.dart';
 
@@ -163,42 +162,17 @@ class HomeScreenAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.all(20),
+    return Padding(
+      padding: const EdgeInsets.all(20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          HeaderText('Welcome,\nUsername'),
-          LogOutButton(),
+          const HeaderText('Welcome,\nUsername'),
+          LogOutButton(
+            onTap: () => authStateChangesNotifier.value = null,
+          ),
         ],
       ),
-    );
-  }
-}
-
-class LogOutButton extends StatelessWidget {
-  const LogOutButton({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          padding: const EdgeInsets.all(10),
-          decoration: BoxDecoration(
-            color: context.appTheme.accent,
-            shape: BoxShape.circle,
-          ),
-          child: SvgPicture.asset(AppSvgs.logOut),
-        ),
-        SText(
-          'Log out',
-          style: TextStyle(
-            fontSize: 14,
-            fontFamily: AppFonts.lato,
-          ),
-        )
-      ],
     );
   }
 }

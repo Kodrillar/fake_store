@@ -1,6 +1,7 @@
 import 'package:fake_store/src/features/auth/presentation/screens/login.dart';
 import 'package:fake_store/src/features/auth/presentation/screens/welcome.dart';
 import 'package:fake_store/src/features/cart/presentation/screens/cart.dart';
+import 'package:fake_store/src/features/home/domain/product.dart';
 import 'package:fake_store/src/features/home/presentation/screens/home.dart';
 import 'package:fake_store/src/features/home/presentation/screens/nav_home.dart';
 import 'package:fake_store/src/features/home/presentation/screens/product_details.dart';
@@ -46,7 +47,10 @@ GoRouter getGoRouter(String initialLocation) => GoRouter(
                 GoRoute(
                   path: AppRoutes.productDetails.name,
                   name: AppRoutes.productDetails.name,
-                  builder: (context, state) => const ProductDetailsScreen(),
+                  builder: (context, state) {
+                    final Product product = state.extra as Product;
+                    return ProductDetailsScreen(product: product);
+                  },
                 ),
                 GoRoute(
                   path: AppRoutes.cart.name,

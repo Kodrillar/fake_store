@@ -1,6 +1,9 @@
 import 'package:fake_store/src/core/extensions/build_context.dart';
+import 'package:fake_store/src/features/cart/presentation/screens/cart.dart';
+import 'package:fake_store/src/features/home/domain/navigation_bar_detail.dart';
+import 'package:fake_store/src/features/home/presentation/cubit/home_state.dart';
 import 'package:fake_store/src/features/home/presentation/screens/home.dart';
-import 'package:fake_store/src/res/app_svgs.dart';
+import 'package:fake_store/src/features/wishlist/presentation/screens/wishlist.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -9,24 +12,42 @@ class NavHomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: const HomeScreen(),
-      bottomNavigationBar: HomeBottomNavBar(
-        onTap: (currentIndex) {},
-        children: [
-          SvgPicture.asset(AppSvgs.home),
-          Icon(
-            Icons.favorite_outline,
-            color: context.appTheme.textAccent,
-          ),
-          SvgPicture.asset(
-            AppSvgs.cart,
-            colorFilter: ColorFilter.mode(
-              context.appTheme.textAccent,
-              BlendMode.srcIn,
-            ),
-          ),
-        ],
+    return ValueListenableBuilder(
+      valueListenable: navIndexNotifier,
+      builder: (context, currentIndex, _) {
+        return Scaffold(
+          body: [
+            const HomeScreen(),
+            const WishListScreen(),
+            const CartScreen(),
+          ][currentIndex],
+          bottomNavigationBar: HomeBottomNavBar(
+              onTap: (currentIndex) => navIndexNotifier.value = currentIndex,
+              children: List<Widget>.generate(
+                NavigationBarDetail.navIcons.length,
+                (index) => NavBarIcon(
+                  icon: NavigationBarDetail.navIcons[index],
+                  isSelected: index == currentIndex,
+                ),
+              )),
+        );
+      },
+    );
+  }
+}
+
+class NavBarIcon extends StatelessWidget {
+  const NavBarIcon({super.key, required this.icon, this.isSelected = false});
+  final String icon;
+  final bool isSelected;
+
+  @override
+  Widget build(BuildContext context) {
+    return SvgPicture.asset(
+      icon,
+      colorFilter: ColorFilter.mode(
+        isSelected ? context.appTheme.primary : context.appTheme.textAccent,
+        BlendMode.srcIn,
       ),
     );
   }

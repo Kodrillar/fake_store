@@ -2,6 +2,7 @@ import 'package:fake_store/src/core/extensions/build_context.dart';
 import 'package:fake_store/src/core/widgets/app_primary_button.dart';
 import 'package:fake_store/src/core/widgets/app_scaffold.dart';
 import 'package:fake_store/src/core/widgets/button_text.dart';
+import 'package:fake_store/src/features/home/domain/product.dart';
 import 'package:fake_store/src/res/app_fonts.dart';
 import 'package:fake_store/src/res/app_spacers.dart';
 import 'package:fake_store/src/routing/app_router.dart';
@@ -10,7 +11,9 @@ import 'package:go_router/go_router.dart';
 import 'package:screendapt/screendapt.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
-  const ProductDetailsScreen({super.key});
+  const ProductDetailsScreen({super.key, required this.product});
+
+  final Product product;
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +32,7 @@ class ProductDetailsScreen extends StatelessWidget {
                       children: [
                         SizedBox(
                           height: 300,
-                          child: Image.network(
-                            'https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg',
-                          ),
+                          child: Image.network(product.image),
                         )
                       ],
                     ),
@@ -48,8 +49,8 @@ class ProductDetailsScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     SText(
-                      'Xbox One Elite Series 2 Controller',
-                      maxLines: 1,
+                      product.title,
+                      maxLines: 2,
                       style: TextStyle(
                           overflow: TextOverflow.ellipsis,
                           fontWeight: FontWeight.w600,
@@ -59,7 +60,7 @@ class ProductDetailsScreen extends StatelessWidget {
                     Spacers.h10,
                     //CATEGORY
                     SText(
-                      'Gaming Category',
+                      product.category,
                       style: TextStyle(
                         fontWeight: FontWeight.w600,
                         color: context.appTheme.textSecondary.withOpacity(.5),
@@ -77,14 +78,14 @@ class ProductDetailsScreen extends StatelessWidget {
                           size: 12,
                         ),
                         Spacers.w2,
-                        const SText(
-                          '4.25',
-                          style: TextStyle(
+                        SText(
+                          '${product.rating.rate}',
+                          style: const TextStyle(
                               fontSize: 10.5, fontWeight: FontWeight.w600),
                         ),
                         Spacers.w5,
                         SText(
-                          '12 Reviews',
+                          '${product.rating.count} Reviews',
                           style: TextStyle(
                             fontSize: 10.5,
                             color: context.appTheme.primary.withOpacity(.4),
@@ -97,7 +98,7 @@ class ProductDetailsScreen extends StatelessWidget {
                 ),
               ),
             ),
-            const ProductDetailsFooter(),
+            ProductDetailsFooter(product: product),
           ],
         ),
       ),
@@ -106,7 +107,9 @@ class ProductDetailsScreen extends StatelessWidget {
 }
 
 class ProductDetailsFooter extends StatelessWidget {
-  const ProductDetailsFooter({super.key});
+  const ProductDetailsFooter({super.key, required this.product});
+
+  final Product product;
 
   @override
   Widget build(BuildContext context) {
@@ -127,7 +130,7 @@ class ProductDetailsFooter extends StatelessWidget {
                 ),
               ),
               SText(
-                '\$79.99',
+                '\$${product.price}',
                 style: TextStyle(fontFamily: AppFonts.lora, fontSize: 16),
               ),
             ],

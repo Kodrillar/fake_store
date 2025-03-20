@@ -2,19 +2,16 @@ import 'package:dio/dio.dart';
 import 'package:fake_store/src/core/utils/network_response.dart';
 import 'package:fake_store/src/core/utils/service_locators.dart';
 import 'package:fake_store/src/exceptions/app_exceptions.dart';
-import 'package:fake_store/src/features/auth/domain/login_data.dart';
+import 'package:fake_store/src/features/home/domain/product.dart';
 
-class AuthNetworkHelper {
-  Future<String> logIn(LoginData login) async {
+class HomeRepository {
+  Future<List<Product>> fetchProducts() async {
     try {
-      final Response response = await getIt.get<Dio>().post(
-            '/auth/login',
-            data: login.toJson(),
-          );
+      final Response response = await getIt.get<Dio>().get('/products');
 
-      final responseData = response.data as Map;
+      final responseData = List<Map<String, dynamic>>.from(response.data);
 
-      return responseData['token'];
+      return responseData.map<Product>(Product.fromMap).toList();
     } on DioException catch (dioException) {
       final dioExceptionType = dioException.type;
 
@@ -29,7 +26,8 @@ class AuthNetworkHelper {
         default:
           throw BadResponseException();
       }
-    } catch (ex) {
+    } catch (ex, st) {
+      print('Ex from nte+>....>>> $ex, $st');
       throw UnexpectedException();
     }
 

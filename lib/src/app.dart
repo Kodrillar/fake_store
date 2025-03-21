@@ -1,5 +1,6 @@
 import 'package:fake_store/src/features/auth/bloc/auth_bloc.dart';
 import 'package:fake_store/src/features/auth/data/repository/auth.dart';
+import 'package:fake_store/src/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:fake_store/src/features/home/presentation/cubit/home_cubit.dart';
 import 'package:fake_store/src/routing/app_router.dart';
 import 'package:fake_store/src/theme/app_theme.dart';
@@ -23,6 +24,7 @@ class FakeStoreApp extends StatelessWidget {
             providers: [
               BlocProvider(create: (context) => AuthBloc()),
               BlocProvider(create: (context) => HomeCubit()),
+              BlocProvider(create: (context) => CartCubit()),
             ],
             child: ValueListenableBuilder(
                 valueListenable: authStateChangesNotifier,

@@ -220,7 +220,7 @@ class HomeScreenAppBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const HeaderText('Welcome,\nUsername'),
+          const HeaderText('Welcome,\nKind User'),
           LogOutButton(
             onTap: () => authStateChangesNotifier.value = null,
           ),

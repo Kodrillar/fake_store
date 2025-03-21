@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:fake_store/src/features/home/domain/rating.dart';
 
 class Product {
@@ -50,8 +49,6 @@ class Product {
       ),
     );
   }
-
-  String toJson() => json.encode(toMap());
 
   @override
   String toString() {

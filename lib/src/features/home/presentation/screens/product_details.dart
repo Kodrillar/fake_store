@@ -1,12 +1,14 @@
 import 'package:fake_store/src/core/extensions/build_context.dart';
 import 'package:fake_store/src/core/widgets/app_primary_button.dart';
 import 'package:fake_store/src/core/widgets/app_scaffold.dart';
+import 'package:fake_store/src/core/widgets/app_snack_bar.dart';
 import 'package:fake_store/src/core/widgets/button_text.dart';
+import 'package:fake_store/src/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:fake_store/src/features/home/domain/product.dart';
 import 'package:fake_store/src/res/app_fonts.dart';
 import 'package:fake_store/src/res/app_spacers.dart';
-import 'package:fake_store/src/routing/app_router.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:screendapt/screendapt.dart';
 
@@ -111,6 +113,14 @@ class ProductDetailsFooter extends StatelessWidget {
 
   final Product product;
 
+  void _addToCart(BuildContext context) async {
+    await context.read<CartCubit>().setCartItem(product);
+
+    if (context.mounted) {
+      AppSnackBar.show(context, message: 'Product added to Cart');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -140,7 +150,7 @@ class ProductDetailsFooter extends StatelessWidget {
           Expanded(
             child: AppPrimaryButton(
               child: const ButtonText('Add to cart'),
-              onPressed: () => context.pushNamed(AppRoutes.cart.name),
+              onPressed: () => _addToCart(context),
             ),
           )
         ],

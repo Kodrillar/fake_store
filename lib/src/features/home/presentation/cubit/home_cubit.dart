@@ -15,11 +15,8 @@ class HomeCubit extends Cubit<HomeState> {
       final List<Product> products =
           await getIt.get<HomeRepository>().fetchProducts();
 
-      print('Cubit prods;==========> $products');
-
       emit(state.copyWith(asyncState: AsyncData<List<Product>>(products)));
     } catch (ex) {
-      print('Cubit ex:======== $ex');
       emit(state.copyWith(asyncState: AsyncError(ex)));
     }
   }

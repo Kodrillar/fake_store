@@ -26,8 +26,7 @@ class HomeRepository {
         default:
           throw BadResponseException();
       }
-    } catch (ex, st) {
-      print('Ex from nte+>....>>> $ex, $st');
+    } catch (ex) {
       throw UnexpectedException();
     }
 

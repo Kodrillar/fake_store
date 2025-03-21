@@ -3,8 +3,11 @@ import 'package:fake_store/src/core/widgets/app_primary_button.dart';
 import 'package:fake_store/src/core/widgets/app_scaffold.dart';
 import 'package:fake_store/src/core/widgets/app_snack_bar.dart';
 import 'package:fake_store/src/core/widgets/button_text.dart';
+import 'package:fake_store/src/core/widgets/wish_list_update_icon.dart';
 import 'package:fake_store/src/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:fake_store/src/features/home/domain/product.dart';
+import 'package:fake_store/src/features/wish_list/cubit/wish_list_cubit.dart';
+import 'package:fake_store/src/features/wish_list/cubit/wish_list_state.dart';
 import 'package:fake_store/src/res/app_fonts.dart';
 import 'package:fake_store/src/res/app_spacers.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +27,7 @@ class ProductDetailsScreen extends StatelessWidget {
         color: context.appTheme.foreground,
         child: Column(
           children: [
-            const ProductDetailsScreenAppBar(),
+            ProductDetailsScreenAppBar(product: product),
             Expanded(
               child: Center(
                 child: SingleChildScrollView(
@@ -160,7 +163,9 @@ class ProductDetailsFooter extends StatelessWidget {
 }
 
 class ProductDetailsScreenAppBar extends StatelessWidget {
-  const ProductDetailsScreenAppBar({super.key});
+  const ProductDetailsScreenAppBar({super.key, required this.product});
+
+  final Product product;
 
   @override
   Widget build(BuildContext context) {
@@ -176,7 +181,7 @@ class ProductDetailsScreenAppBar extends StatelessWidget {
               color: context.appTheme.primary,
             ),
           ),
-          const Icon(Icons.favorite_outline),
+          WishListUpdateIcon(product: product)
         ],
       ),
     );

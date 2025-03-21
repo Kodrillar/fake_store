@@ -3,7 +3,7 @@ import 'package:fake_store/src/features/cart/presentation/screens/cart.dart';
 import 'package:fake_store/src/features/home/domain/navigation_bar_detail.dart';
 import 'package:fake_store/src/features/home/presentation/cubit/home_state.dart';
 import 'package:fake_store/src/features/home/presentation/screens/home.dart';
-import 'package:fake_store/src/features/wishlist/presentation/screens/wishlist.dart';
+import 'package:fake_store/src/features/wish_list/presentation/screens/wish_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 

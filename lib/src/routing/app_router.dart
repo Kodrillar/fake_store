@@ -5,7 +5,7 @@ import 'package:fake_store/src/features/home/domain/product.dart';
 import 'package:fake_store/src/features/home/presentation/screens/home.dart';
 import 'package:fake_store/src/features/home/presentation/screens/nav_home.dart';
 import 'package:fake_store/src/features/home/presentation/screens/product_details.dart';
-import 'package:fake_store/src/features/wishlist/presentation/screens/wishlist.dart';
+import 'package:fake_store/src/features/wish_list/presentation/screens/wish_list.dart';
 import 'package:go_router/go_router.dart';
 
 enum AppRoutes {

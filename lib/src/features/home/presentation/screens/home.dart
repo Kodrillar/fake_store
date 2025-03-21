@@ -7,8 +7,10 @@ import 'package:fake_store/src/core/widgets/app_scaffold.dart';
 import 'package:fake_store/src/core/widgets/app_snack_bar.dart';
 import 'package:fake_store/src/core/widgets/header_text.dart';
 import 'package:fake_store/src/core/widgets/log_out_button.dart';
+import 'package:fake_store/src/core/widgets/product_image.dart';
 import 'package:fake_store/src/core/widgets/product_name_text.dart';
 import 'package:fake_store/src/core/widgets/product_price_text.dart';
+import 'package:fake_store/src/core/widgets/wish_list_update_icon.dart';
 import 'package:fake_store/src/features/auth/data/repository/auth.dart';
 import 'package:fake_store/src/features/home/domain/product.dart';
 import 'package:fake_store/src/features/home/presentation/cubit/home_cubit.dart';
@@ -124,19 +126,7 @@ class ProductCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             //IMAGE
-            Container(
-              margin: const EdgeInsets.all(10),
-              height: 65,
-              width: 65,
-              decoration: BoxDecoration(
-                color: context.appTheme.textAccent.withOpacity(.3),
-                borderRadius: BorderRadius.circular(5),
-                image: DecorationImage(
-                  image: Image.network(product.image).image,
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
+            ProductImage(imageUrl: product.image),
 
             Spacers.w20,
 
@@ -148,12 +138,7 @@ class ProductCard extends StatelessWidget {
                   Expanded(child: ProductCardDetails(product: product)),
 
                   //FAVORITE SELECTION
-                  Icon(
-                    Icons.favorite_outline,
-                    // color: context.appTheme.favorite,
-                    color: context.appTheme.secondary.withOpacity(.25),
-                    size: 18,
-                  ),
+                  WishListUpdateIcon(product: product)
                 ],
               ),
             )

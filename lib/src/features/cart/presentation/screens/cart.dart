@@ -11,10 +11,8 @@ import 'package:fake_store/src/features/cart/presentation/cubit/cart_cubit.dart'
 import 'package:fake_store/src/features/cart/presentation/cubit/cart_state.dart';
 import 'package:fake_store/src/res/app_fonts.dart';
 import 'package:fake_store/src/res/app_spacers.dart';
-import 'package:fake_store/src/routing/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:screendapt/screendapt.dart';
 
 class CartScreen extends StatefulWidget {
@@ -270,10 +268,9 @@ class CartScreenFooter extends StatelessWidget {
           ),
           Spacers.w25,
           // ACTION
-          Expanded(
+          const Expanded(
             child: AppPrimaryButton(
-              child: const ButtonText('Checkout'),
-              onPressed: () => context.pushNamed(AppRoutes.wishList.name),
+              child: ButtonText('Checkout'),
             ),
           )
         ],

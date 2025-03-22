@@ -5,6 +5,7 @@ class AppSnackBar {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(message),
+          duration: const Duration(milliseconds: 800),
         ),
       );
 }

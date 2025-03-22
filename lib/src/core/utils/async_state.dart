@@ -1,8 +1,9 @@
 import 'package:equatable/equatable.dart';
 
 sealed class AsyncState extends Equatable {
-  bool get isLoading;
-  bool get hasError;
+  bool get isLoading => false;
+  bool get hasError => false;
+  bool get hasData => false;
 }
 
 final class AsyncLoading extends AsyncState {
@@ -11,9 +12,6 @@ final class AsyncLoading extends AsyncState {
 
   @override
   bool get isLoading => true;
-
-  @override
-  bool get hasError => false;
 
   @override
   String toString() {
@@ -27,13 +25,14 @@ final class AsyncData<T> extends AsyncState {
   final T? data;
 
   @override
-  bool get isLoading => false;
-
-  @override
   List<Object?> get props => [data];
 
   @override
-  bool get hasError => false;
+  bool get hasData {
+    if (data is List) return (data as List).isNotEmpty && (data != null);
+
+    return data != null;
+  }
 
   @override
   String toString() {
@@ -45,9 +44,6 @@ final class AsyncError<T> extends AsyncState {
   AsyncError(this.error) : super();
 
   final T error;
-
-  @override
-  bool get isLoading => false;
 
   @override
   List<Object?> get props => [error];

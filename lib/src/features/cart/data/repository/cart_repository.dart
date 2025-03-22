@@ -10,13 +10,19 @@ class CartRepository {
 
   final _cartStorageKey = 'cart';
 
+  Future<void> clearCart() async =>
+      await _sharedPreferences.remove(_cartStorageKey);
+
   Future<List<CartItem>> fetchCachedCartItems() async {
     final encodedCartItems = _sharedPreferences.getString(_cartStorageKey);
 
-    final cartItemsMap = _decodeCartItemsString(encodedCartItems!);
+    if (encodedCartItems != null) {
+      final cartItemsMap = _decodeCartItemsString(encodedCartItems);
 
-    List<CartItem> cartItems = cartItemsMap.map(CartItem.fromMap).toList();
-    return cartItems;
+      List<CartItem> cartItems = cartItemsMap.map(CartItem.fromMap).toList();
+      return cartItems;
+    }
+    return [];
   }
 
   Future<void> removeCartItem(Product product) async {

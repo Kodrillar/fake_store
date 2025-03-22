@@ -9,14 +9,20 @@ class WishListRepository {
 
   final SharedPreferences _sharedPreferences = getIt.get<SharedPreferences>();
 
+  Future<void> clearWishList() async =>
+      await _sharedPreferences.remove(_wishListStoreKey);
+
   Future<List<Product>> fetchCachedWishList() async {
     final encodedWishList = _sharedPreferences.getString(_wishListStoreKey);
 
-    final wishListMap = _decodeWishListItemsString(encodedWishList!);
+    if (encodedWishList != null) {
+      final wishListMap = _decodeWishListItemsString(encodedWishList);
 
-    List<Product> wishList = wishListMap.map(Product.fromMap).toList();
+      List<Product> wishList = wishListMap.map(Product.fromMap).toList();
 
-    return wishList;
+      return wishList;
+    }
+    return List.empty();
   }
 
   Future<void> addWishListItem(Product product) async {

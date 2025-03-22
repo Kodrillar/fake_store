@@ -11,10 +11,10 @@ import 'package:fake_store/src/core/widgets/product_image.dart';
 import 'package:fake_store/src/core/widgets/product_name_text.dart';
 import 'package:fake_store/src/core/widgets/product_price_text.dart';
 import 'package:fake_store/src/core/widgets/wish_list_update_icon.dart';
-import 'package:fake_store/src/features/auth/data/repository/auth.dart';
 import 'package:fake_store/src/features/home/domain/product.dart';
 import 'package:fake_store/src/features/home/presentation/cubit/home_cubit.dart';
 import 'package:fake_store/src/features/home/presentation/cubit/home_state.dart';
+import 'package:fake_store/src/features/wish_list/presentation/cubit/wish_list_cubit.dart';
 import 'package:fake_store/src/res/app_spacers.dart';
 import 'package:fake_store/src/routing/app_router.dart';
 import 'package:flutter/material.dart';
@@ -30,14 +30,23 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  Future<void> _fetchProducts() async =>
+  Future<void> _fetchProducts() async {
+    if (!context.read<HomeCubit>().state.asyncState.hasData) {
       context.read<HomeCubit>().fetchProducts();
+    }
+  }
+
+  Future<void> _fetchWishlist() async =>
+      context.read<WishListCubit>().fetchWishListItems();
 
   @override
   void initState() {
     super.initState();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => _fetchProducts());
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _fetchProducts();
+      _fetchWishlist();
+    });
   }
 
   @override
@@ -47,58 +56,63 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           const HomeScreenAppBar(),
           Expanded(
-            child: SingleChildScrollView(
-              child: SContainer(
-                child: Column(
-                  children: [
-                    Spacers.h20,
-                    const Align(
-                      alignment: Alignment.topLeft,
-                      child: HeaderText(
-                        'Fake Store',
-                        fontSize: 24,
+            child: RefreshIndicator(
+              color: context.appTheme.accent,
+              backgroundColor: context.appTheme.primary,
+              onRefresh: () => context.read<HomeCubit>().fetchProducts(),
+              child: SingleChildScrollView(
+                child: SContainer(
+                  child: Column(
+                    children: [
+                      Spacers.h20,
+                      const Align(
+                        alignment: Alignment.topLeft,
+                        child: HeaderText(
+                          'Fake Store',
+                          fontSize: 24,
+                        ),
                       ),
-                    ),
-                    Spacers.h25,
-                    BlocConsumer<HomeCubit, HomeState>(
-                      listenWhen: (previous, current) =>
-                          current is AsyncError && previous is! AsyncError,
-                      listener: (context, state) {
-                        if (state.asyncState is AsyncError) {
-                          AppSnackBar.show(context,
-                              message: (state.asyncState as AsyncError)
-                                  .error
-                                  .toString());
-                        }
-                      },
-                      builder: (context, homeState) {
-                        return switch (homeState.asyncState) {
-                          AsyncLoading() => const AppLoader(),
-                          AsyncError() => SText(
-                              (homeState.asyncState as AsyncError)
-                                  .error
-                                  .toString()),
-                          AsyncData() => Column(
-                              children: [
-                                if (homeState.asyncState is AsyncData)
-                                  for (Product product
-                                      in (homeState.asyncState as AsyncData)
-                                          .data) ...[
-                                    GestureDetector(
-                                      onTap: () => context.pushNamed(
-                                        AppRoutes.productDetails.name,
-                                        extra: product,
+                      Spacers.h25,
+                      BlocConsumer<HomeCubit, HomeState>(
+                        listenWhen: (previous, current) =>
+                            current is AsyncError && previous is! AsyncError,
+                        listener: (context, state) {
+                          if (state.asyncState is AsyncError) {
+                            AppSnackBar.show(context,
+                                message: (state.asyncState as AsyncError)
+                                    .error
+                                    .toString());
+                          }
+                        },
+                        builder: (context, homeState) {
+                          return switch (homeState.asyncState) {
+                            AsyncLoading() => const AppLoader(),
+                            AsyncError() => SText(
+                                (homeState.asyncState as AsyncError)
+                                    .error
+                                    .toString()),
+                            AsyncData() => Column(
+                                children: [
+                                  if (homeState.asyncState is AsyncData)
+                                    for (Product product
+                                        in (homeState.asyncState as AsyncData)
+                                            .data) ...[
+                                      GestureDetector(
+                                        onTap: () => context.pushNamed(
+                                          AppRoutes.productDetails.name,
+                                          extra: product,
+                                        ),
+                                        child: ProductCard(product: product),
                                       ),
-                                      child: ProductCard(product: product),
-                                    ),
-                                    Spacers.h10
-                                  ],
-                              ],
-                            )
-                        };
-                      },
-                    ),
-                  ],
+                                      Spacers.h10
+                                    ],
+                                ],
+                              )
+                          };
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -200,15 +214,13 @@ class HomeScreenAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(20),
+    return const Padding(
+      padding: EdgeInsets.all(20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const HeaderText('Welcome,\nKind User'),
-          LogOutButton(
-            onTap: () => authStateChangesNotifier.value = null,
-          ),
+          HeaderText('Welcome,\nKind User'),
+          LogOutButton(),
         ],
       ),
     );

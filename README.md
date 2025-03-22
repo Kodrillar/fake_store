@@ -38,3 +38,11 @@ This project uses a layered architecture where entities(Presentation, Data, Doma
 ## Adaptive UI Implementation
 
 In this project, I used a package created by me, [Screendapt package](https://github.com/Kodrillar/screendapt) which utilizes the [Flutter Screenutil package](https://pub.dev/packages/flutter_screenutil) under the hood to ensure UI components are adaptive. Widgets like the `SText`, `SContainer`, and `SIcon` where used to create UI components to ensure that overall app UI looks great on different devices.
+
+## Authentication & App APIs
+
+This project utilizes the open source [Fake Store API](https://fakestoreapi.com/). Thanks to the creators.
+
+You can use these credentials to log in or create yours with the [Fake Store API](https://fakestoreapi.com/docs):
+**Username:** `johnd`\
+**Password:** `m38rmF$`

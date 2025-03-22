@@ -6,8 +6,7 @@ import 'package:fake_store/src/core/widgets/button_text.dart';
 import 'package:fake_store/src/core/widgets/wish_list_update_icon.dart';
 import 'package:fake_store/src/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:fake_store/src/features/home/domain/product.dart';
-import 'package:fake_store/src/features/wish_list/cubit/wish_list_cubit.dart';
-import 'package:fake_store/src/features/wish_list/cubit/wish_list_state.dart';
+
 import 'package:fake_store/src/res/app_fonts.dart';
 import 'package:fake_store/src/res/app_spacers.dart';
 import 'package:flutter/material.dart';

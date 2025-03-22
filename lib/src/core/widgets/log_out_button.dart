@@ -1,5 +1,5 @@
 import 'package:fake_store/src/core/extensions/build_context.dart';
-import 'package:fake_store/src/features/auth/bloc/auth_bloc.dart';
+import 'package:fake_store/src/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:fake_store/src/res/app_fonts.dart';
 import 'package:fake_store/src/res/app_svgs.dart';
 import 'package:flutter/material.dart';

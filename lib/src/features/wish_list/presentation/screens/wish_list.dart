@@ -8,15 +8,28 @@ import 'package:fake_store/src/core/widgets/product_name_text.dart';
 import 'package:fake_store/src/core/widgets/product_price_text.dart';
 import 'package:fake_store/src/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:fake_store/src/features/home/domain/product.dart';
-import 'package:fake_store/src/features/wish_list/cubit/wish_list_cubit.dart';
-import 'package:fake_store/src/features/wish_list/cubit/wish_list_state.dart';
+import 'package:fake_store/src/features/wish_list/presentation/cubit/wish_list_cubit.dart';
+import 'package:fake_store/src/features/wish_list/presentation/cubit/wish_list_state.dart';
 import 'package:fake_store/src/res/app_spacers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:screendapt/screendapt.dart';
 
-class WishListScreen extends StatelessWidget {
+class WishListScreen extends StatefulWidget {
   const WishListScreen({super.key});
+
+  @override
+  State<WishListScreen> createState() => _WishListScreenState();
+}
+
+class _WishListScreenState extends State<WishListScreen> {
+  void _fetchWishList() => context.read<WishListCubit>().fetchWishListItems();
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchWishList();
+  }
 
   @override
   Widget build(BuildContext context) {

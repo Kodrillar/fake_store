@@ -1,8 +1,8 @@
 import 'package:fake_store/src/core/extensions/build_context.dart';
 import 'package:fake_store/src/core/widgets/app_snack_bar.dart';
 import 'package:fake_store/src/features/home/domain/product.dart';
-import 'package:fake_store/src/features/wish_list/cubit/wish_list_cubit.dart';
-import 'package:fake_store/src/features/wish_list/cubit/wish_list_state.dart';
+import 'package:fake_store/src/features/wish_list/presentation/cubit/wish_list_cubit.dart';
+import 'package:fake_store/src/features/wish_list/presentation/cubit/wish_list_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

@@ -1,7 +1,7 @@
 import 'package:fake_store/src/core/utils/async_state.dart';
 import 'package:fake_store/src/core/utils/service_locators.dart';
-import 'package:fake_store/src/features/auth/bloc/auth_events.dart';
-import 'package:fake_store/src/features/auth/bloc/auth_state.dart';
+import 'package:fake_store/src/features/auth/presentation/bloc/auth_events.dart';
+import 'package:fake_store/src/features/auth/presentation/bloc/auth_state.dart';
 import 'package:fake_store/src/features/auth/data/repository/auth.dart';
 import 'package:fake_store/src/features/auth/domain/login_data.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
